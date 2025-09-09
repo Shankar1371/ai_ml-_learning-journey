@@ -20,3 +20,5 @@ plt.bar(categories, values,color=['red','blue','green'])
 #and we also set the colors
 plt.title("bar plot")
 plt.show()
+
+#and this is the matplotlib basics that i have learnt
