@@ -17,6 +17,7 @@ plt.show()
 
 #scatterplot
 sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=df)
+#hue is used species that gives a special color to stand out
 plt.title("Scatter plot for sepal length")
 plt.show()
 
