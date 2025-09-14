@@ -41,5 +41,16 @@ df= pd.get_dummies(df,columns=["Embarked"], drop_first=True)
 print("prepared Data:\n", df.head())
 #the above steps is used to clean the dataset for the ml
 
+#splitting the data
+#the features(X) and target(Y)
 
+X = df.drop(columns=["Survived"])
+#the remaining columns are stored in x
+y=df["survived"]
+#survived is in y
+
+
+#train and test split( 80% tain and 20% test)
+X_train,X_test,y_train,y_test = train_test_split(
+    X,y,test_size=0.2, random_state=42)
 
