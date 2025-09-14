@@ -46,7 +46,7 @@ print("prepared Data:\n", df.head())
 
 X = df.drop(columns=["Survived"])
 #the remaining columns are stored in x
-y=df["survived"]
+y=df["Survived"]
 #survived is in y
 
 
@@ -64,5 +64,22 @@ model = LogisticRegression(max_iter=500)
 #now train the model
 model.fit(X_train,y_train)
 
-print("Model trainig completed")
+print("Model training completed")
 
+#predictions and evaluvation of the model that we have created
+
+y_pred = model.predict(X_test)
+# the above line is used to predict by using the test data
+
+#accuracy of the model
+acc = accuracy_score(y_test,y_pred)
+print("Accuracy:",acc)
+#we compare the actual values with the y predicted values
+
+#lets go with the next confusion matrix
+print("\n Confusion matric:\n",confusion_matrix(y_test,y_pred))
+#evaluvateds performance
+
+#classification report
+print("\n Classification report:\n",classification_report(y_test,y_pred))
+#gives a well aggrevated averages
