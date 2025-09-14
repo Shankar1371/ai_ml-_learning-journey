@@ -30,3 +30,4 @@ df["Age"].fillna(df["Age"].median(),inplace=True)
 df["embarked"].fillna(df["Embarked"].mode()[1],inplace=True)
 
 print("\n After cleaning missing values:\n",df.isnull().sum())
+
