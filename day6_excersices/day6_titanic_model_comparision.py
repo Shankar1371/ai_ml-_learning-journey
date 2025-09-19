@@ -107,3 +107,22 @@ rf.fit(X_train,Y_Train)
 y_pred_rf=rf.predict(X_test)
 
 
+#after training the models that we have created now we need to evaluvate the models that we have created
+#and for that we are creating a function called evaluvate model
+
+def evaluvate_model(name,y_true,y_pred):
+    print(f"\n {name} Results")
+    print("Accuracy:",accuracy_score(y_true,y_pred))
+    print("Confusion Matrix:\n",confusion_matrix(y_true,y_pred))
+    print("Classification Report:\n",classification_report(y_true,y_pred))
+    #this function is used to calculate the accuracy , confusion matrix and classification report that we can called for finding the evaluvation of the models that we have created
+
+#evaluvate all models
+#by using the top function
+evaluvate_model("Logistic regression",Y_test,Y_pred_log)
+evaluvate_model("Decision tree",Y_test,y_pred_tree)
+evaluvate_model("Random forest",Y_test,y_pred_rf)
+
+
+
+
