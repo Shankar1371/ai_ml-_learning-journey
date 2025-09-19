@@ -57,3 +57,53 @@ X_train,X_test,Y_Train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42
 print("the train shape:",X_train.shape)
 print("the test shape:",X_test.shape)
 
+#now lets train multiple models that we use this system and that would be logistic regression, Random Forest  and decision tree
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+#this line used for the importing the decision tree library
+from sklearn.ensemble import RandomForestClassifier
+#the above line is used for the importing the library for random forest library for developing the model
+
+
+
+#now training a model with logistic regression
+log_reg=LogisticRegression(max_iter=500)
+#maxiter is a parameter that is used for te maxiumum number if iterations for the solver to convergence .
+#and this helps to prevent the model from getting stuck in an infinte loop
+log_reg.fit(X_train,Y_Train)
+#the above line trains the logistic regression
+#log_reg.fit(X,Y) as it is a supervised learning that has been used
+Y_pred_log=log_reg.predict(X_test)
+#the prediction  is done by giving only gthe data that is there for xtest
+#and then comparing the data by testing x with the model
+#later we compare the output that we got to the actual y_test that tells us how good the system
+
+
+#lets learn about the decision tree
+#what is a decision tree
+#decsion tree is a supervised machine learning algorithm that ises a tree-like model for decisions and their possible consequences.
+#it is used for both classification and regression
+dtree=DecisionTreeClassifier(random_state=42, max_depth=5)
+#here the above line is used to create and train the decsion tree model that has the random forest and maxdepths set
+#random_state=42 is the parameter that is set for number generator that is random in the dataset that we are using
+#max_depths is the hyperparameter that controls the complexity of the decision tree and that limits the maximum depths of the tree
+dtree.fit(X_train,Y_Train)
+#this gives the data for the model that it needed to be trained
+y_pred_tree=dtree.predict(X_test)
+
+
+#lets go and learn about the random forest
+#what is random forest in ai
+#it is powerful supervised machine learning algorithm that uses ensemble learning method.
+#the random forest is an extension to decision tree and producess the accurate prediction
+
+#uses or advantages of random forest in the ai
+# High accuracy , reduces overfitting and handles various data types
+#the disadvantages are computationally expensive and have more complexity to the solution
+
+rf=RandomForestClassifier(random_state=42,n_estimators=100,max_depth=5)
+#n_estimators is used to specify the number of individual decision tress to be created in the forest
+rf.fit(X_train,Y_Train)
+y_pred_rf=rf.predict(X_test)
+
+
