@@ -1,0 +1,36 @@
+the goals for today
+- Cross validation
+-ROC curve and AUC
+-Precision vs Recall tradeoff
+as the calculation of the accuracy alone can be misleading
+
+so what is cross validation
+
+what is ROC curve
+Reciever Operating characteristics
+It is a graph that illustrates the performance of the binary classification model at various classification threshoilds.
+#it also provvude the TRR(True positive rate) that is plotted on a y-axis and also known as sensitivity ot recall
+#this also has the FPR(false postive rate) it is plptted on the x-axis
+specificity
+
+
+
+what is AUC
+AUC stands for area under curve , it is a single -value metric that ised to evaluvate the performance of binary classification thresholds.(it is thge area underneath ROC)
+
+
+
+
+What is precision
+precision is a classification metrics that pmeasures the proportion positive predictions that were actually correct
+Precision=
+TruePositives+FalsePositives
+TruePositives
+​
+
+
+True Positives (TP): Cases that were correctly predicted as positive.
+
+False Positives (FP): Cases that were incorrectly predicted as positive (also known as a Type I error or a "false alarm").
+
+
