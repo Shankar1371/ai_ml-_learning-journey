@@ -1,4 +1,5 @@
 #loading the data and preparing that
+import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 #the above line we have taken or imported the train and test split from sklearn
@@ -78,4 +79,27 @@ y_probs= model.predict_proba(X_test)[:,1]
 #it gets the probility of predicting the colums by the x_test that wijll be in time of just one second [:,1]
 
 
+#to gets roc curve based on the y_probability and y_test of the test split
+#and that will use FPR and TPR (that is false positive rate and true positive rate
 
+fpr,tpr,thresholds = roc_curve(y_test,y_probs)
+#thresholds is an array of probability  thresholds used to calculate the FPR and TPR
+
+roc_auc=auc(fpr,tpr)
+
+#auc summarizes an AUC of 1.0 represnets the perfect classifier
+#and AUC of 0.5 is no better than  the random guessing
+
+
+#we will learn how to plot the ROC curve using the library matplot lib that is imported as plt
+#ROC curve
+
+plt.plot(fpr,tpr,label=f'ROC curve (AUC = {roc_auc:.2f})')
+plt.plot([0,1],[0,1],linestyle='--',color='gray')
+#the arguments [0,1] and [0,1] these do have specificates the base line and refrence line of the plot that we are using in the ROC curve
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("Receiver operating characteristic curve")
+plt.legend()
+#legend on the plot helps us with different colors patterns or symbols that helps use to represenr the data series in a graph
+plt.show()
