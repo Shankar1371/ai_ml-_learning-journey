@@ -103,3 +103,36 @@ plt.title("Receiver operating characteristic curve")
 plt.legend()
 #legend on the plot helps us with different colors patterns or symbols that helps use to represenr the data series in a graph
 plt.show()
+
+
+#now we are gonna learn about precision and recall tradeoff
+#the precision-recall tradeoff describes how adjusting a model's decision threshold changes its precision and recall
+
+from sklearn.metrics import precision_recall_curve
+
+precisions, recalls, thresholds =precision_recall_curve(y_test,y_probs)
+#from the above line we will get
+#precisions: that takes an array of the calculated precision values at each threshold
+#recalls: An array of the calculated recalls values at each threshold
+#threshold: an array of the probability thresholds that are used to calculat the precision and recall
+
+#precision is the proportion of positive predictions that were actually correct
+#TruePositives
+#_____________________________
+#TruePositives+FalsePositives
+
+
+
+#Recall= measures the proportions of actual positives that are correctly identified .
+#TruePositives
+#_________________
+#TruePositives+FalseNegatives
+
+
+plt.plot(thresholds, precisions[:-1], label='Precision')
+plt.plot(thresholds, recalls[:-1], label='Recall')
+plt.xlabel(' Decision Threshold')
+plt.ylabel(' score')
+plt.title('Precision-recall tradeoff')
+plt.legend()
+plt.show()
