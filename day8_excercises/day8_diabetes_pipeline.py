@@ -39,7 +39,7 @@ print("Training data shape:",X_train.shape)
 #printing the training data shape
 
 #now trainind multiple models
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -47,8 +47,8 @@ from sklearn.svm import SVC
 #the support vector classifier(SVC) is used to find an optimal hyperplane that maximizes the margin between two classes of data, effectively separating hem to classify the new data points
 
 #first logistic regression
-lof_reg = LinearRegression(max_iter=500)
-lof_reg.fit(X_train,y_train)
+log_reg = LinearRegression(max_iter=500)
+log_reg.fit(X_train, y_train)
 
 #now lets use the decision tree
 dtree = DecisionTreeClassifier(max_depth=5, random_state=42)
@@ -68,3 +68,25 @@ svm =SVC(probability=True, random_state=42)
 #here the probability is true this enables the SVC to calcualte the class probabilties for prediction
 
 svm.fit(X_train,y_train)
+
+
+#evaluvate the models
+
+#that can be achieved by accuracy score and classification_report
+
+from sklearn.metrics import accuracy_score, classification_report
+
+models ={
+    "Logistic Regression": log_reg,
+    "Decision Tree": dtree,
+    "Random Forest": rf,
+    "SVM": svm,
+}
+
+for name, model in models.items():
+    #the above line iterates from each models that are defiened above
+    y_pred = model.predict(X_test)
+    print(f"\n{name}")
+    #the above prints the name3 of the model
+    print("Accuracy:", accuracy_score(y_test, y_pred))
+    print("Classification Report:\n",classification_report(y_test,y_pred))
