@@ -37,3 +37,34 @@ X_test = scaler.transform(X_test)
 
 print("Training data shape:",X_train.shape)
 #printing the training data shape
+
+#now trainind multiple models
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+#the above line is used to bring a specific machine  learning algorithm the support vector classifier
+#the support vector classifier(SVC) is used to find an optimal hyperplane that maximizes the margin between two classes of data, effectively separating hem to classify the new data points
+
+#first logistic regression
+lof_reg = LinearRegression(max_iter=500)
+lof_reg.fit(X_train,y_train)
+
+#now lets use the decision tree
+dtree = DecisionTreeClassifier(max_depth=5, random_state=42)
+dtree.fit(X_train,y_train)
+
+#Random forest
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train,y_train)
+
+
+#Support Vector Machine
+#SVM is a powerful and a versatile supervised machine learning as the algorithm is used for both for classification and regression
+
+
+#Support vector classifier
+svm =SVC(probability=True, random_state=42)
+#here the probability is true this enables the SVC to calcualte the class probabilties for prediction
+
+svm.fit(X_train,y_train)
