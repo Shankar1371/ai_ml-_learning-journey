@@ -39,7 +39,7 @@ print("Training data shape:",X_train.shape)
 #printing the training data shape
 
 #now trainind multiple models
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -47,7 +47,7 @@ from sklearn.svm import SVC
 #the support vector classifier(SVC) is used to find an optimal hyperplane that maximizes the margin between two classes of data, effectively separating hem to classify the new data points
 
 #first logistic regression
-log_reg = LinearRegression(max_iter=500)
+log_reg = LogisticRegression()
 log_reg.fit(X_train, y_train)
 
 #now lets use the decision tree
@@ -90,3 +90,27 @@ for name, model in models.items():
     #the above prints the name3 of the model
     print("Accuracy:", accuracy_score(y_test, y_pred))
     print("Classification Report:\n",classification_report(y_test,y_pred))
+
+#lets do the ROC curve
+#that is the Reciever Operating Characteristic(ROC) curve is used to evaluvate the performance
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+#auc is nothing but area under the curve
+
+plt.figure(figsize=(7,6))
+
+for name, model in models.items():
+    y_probs = model.predict_proba(X_test)[:,1]
+    #the probabilty of getting the y
+    fpr,tpr,_ = roc_curve(y_test,y_probs)#this gets the true positive and true negative
+    roc_auc = auc(fpr,tpr)
+    plt.plot(fpr,tpr,label=f'{name} (AUC={roc_auc:.2f})')
+    #this roc_auc gets the value of AUC that is formated to two decimal places
+
+plt.plot([0,1],[0,1], linestyle='--', color='gray')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title("ROC curve comparision")
+plt.legend()
+plt.show()
