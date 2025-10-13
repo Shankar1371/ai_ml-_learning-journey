@@ -39,3 +39,46 @@ df["BMI_Age"] = df["BMI"] * df["Age"]
 df["Glucose_BMI"] = df["Glucose"] / (df["BMI"] +1)
 
 print(df[["BMI", "Age", "BMI_Age","Glucose_BMI"]].head())
+
+
+#hyperparameter tuning with grid search cv
+#we will tune the randomforest since its flexible and strong
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+#this gridsearch is a crucial tool used for hyperparameter tuning in machine learning . it is primary use is to systematically searc for the optimal combination of hyperparameter
+#for the given model to maximize the performance
+
+
+rf=RandomForestClassifier(random_state=42)
+
+
+param_grid = {
+    "n_estimators": [50, 100, 200],
+    "max_depth": [4, 6, 8, None],
+    "min_samples_split": [2, 5, 10],
+    "min_samples_leaf": [1, 2, 4]
+}
+
+#what is the use of the above line that is used to define the search space for the gridserach
+#thus giving th eblueprint that tells the gridsearch  exactly which hyperparameter combinations to test
+
+#n_estimators is the number of the treess
+#max_depth is used to give the depth of the each tree
+#min-sample split and this is used to gives the samples that are required to be present at a node
+#min_samples_leaf gives the threshold  that contains the leaf
+
+
+grid_search = GridSearchCV(estimator=rf,param_grid=param_grid,cv=5,scoring="accuracy",n_jobs=-1,verbose=1)
+#estimators is used to tune is likely holds an instance of a randomforest
+#param grid  is the hyperparameters that we have given above
+#cv is called cross validation folds. the model will be  trained and evaluvated 5 times for every combination of hyperparameters
+#scoring is given as accuracy as it is the evaluavtion metric used to judge which combination that is best
+#n_jobs is used for the number of cores that are the used
+#verbose mostly contrils the amount of text output that will be eseen during the fitting pprocess
+
+
+grid_search.fit(X_train,y_train)
+
+print("Best parameters:", grid_search.best_params_)
+#this gives the best parameters for the system that is beeen caluclated and grid_search.best_params
+print("best CV Accuracy:", grid_search.best_score_)
