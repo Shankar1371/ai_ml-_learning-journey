@@ -28,3 +28,14 @@ X_scaled =scaler.fit_transform(X)
 #now we arre splitting the dataset into training and test split
 X_train,X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state =42)
 #here we have split the data by using the scaler data \
+
+#now we are learning about the feature engineering
+#lets add a few derived features that is simple and may  reveal the hidden relationships
+
+import numpy as np
+
+df["BMI_Age"] = df["BMI"] * df["Age"]
+#this above line creates a new colum from the existing columns
+df["Glucose_BMI"] = df["Glucose"] / (df["BMI"] +1)
+
+print(df[["BMI", "Age", "BMI_Age","Glucose_BMI"]].head())
