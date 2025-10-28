@@ -82,3 +82,22 @@ grid_search.fit(X_train,y_train)
 print("Best parameters:", grid_search.best_params_)
 #this gives the best parameters for the system that is beeen caluclated and grid_search.best_params
 print("best CV Accuracy:", grid_search.best_score_)
+
+
+#the parameters and the output show the best Hyperparameter
+
+#now evaluvating for the best model
+
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+best_model =grid_search.best_estimator_
+#this is used to find or retrieve the best performing model found in a grid search process in machine learning
+#.best_estimator is a attribute of the grid search object and after the grid search completes its evaluvation of all hyperparmeters combinations
+#and that line  is used for the best_estimator and this code with all the best hyperparameters combination
+
+y_pred = best_model.predict(X_test)
+
+print("\n Test Accuracy:", accuracy_score(y_test, y_pred))
+print("\n Confusion Matrix",confusion_matrix(y_test, y_pred))
+print("\n Classification Report",classification_report(y_test, y_pred))
+
